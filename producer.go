@@ -1,4 +1,4 @@
-package kafka-tester
+package kafkatester
 
 import "encoding/json"
 

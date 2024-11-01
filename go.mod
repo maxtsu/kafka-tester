@@ -1,4 +1,4 @@
-module kafka-tester
+module kafkatester
 
 go 1.23.0
 
