@@ -36,7 +36,7 @@ func main() {
 		"sasl.username":     configYaml.SaslUsername,
 		"sasl.password":     configYaml.SaslPassword,
 		"ssl.ca.location":   configYaml.SslCaLocation,
-		"client.id":         configYaml.GroupID,
+		"client.id":         configYaml.ClientID,
 		"acks":              "all"})
 	if err != nil {
 		fmt.Printf("Failed to create producer: %s\n", err)
@@ -99,6 +99,7 @@ type Config struct {
 	SaslUsername     string `yaml:"sasl.username"`
 	SaslPassword     string `yaml:"sasl.password"`
 	SslCaLocation    string `yaml:"ssl.ca.location"`
+	ClientID         string `yaml:"client.id"`
 	Topics           string `yaml:"topics"`
 }
 
