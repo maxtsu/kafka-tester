@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	kafkatester "kafka-tester"
 	"os"
 	"os/signal"
 	"syscall"
@@ -21,7 +22,7 @@ func main() {
 
 	// Rad the config file
 	byteResult := ReadFile(config_file)
-	var configYaml Config
+	var configYaml kafkatester.Config
 	err := yaml.Unmarshal(byteResult, &configYaml)
 	if err != nil {
 		fmt.Println("kafka-tester.yaml Unmarshall error", err)
@@ -51,8 +52,8 @@ func main() {
 	// test message
 	topic := "gnf.network.telemetry"
 	timestamp := (time.Now().UnixMicro())
-	test_tags := Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
-	test_msg := Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
+	test_tags := kafkatester.Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
+	test_msg := kafkatester.Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
 	key := "192.168.10.10:57344_global"
 
 	// Serialize the message Marshall from JSON
@@ -68,7 +69,6 @@ func main() {
 		},
 		Key:   []byte(key),
 		Value: jsonData,
-		//Headers: []kafka.Header{{Key: "myTestHeader", Value: []byte("header values are binary")}},
 	}
 
 	// Produce the message to the Kafka topic
@@ -91,36 +91,36 @@ func ReadFile(fileName string) []byte {
 	return byteResult
 }
 
-// configuration file kafka-config.yaml
-type Config struct {
-	Producer         bool   `yaml:"producer"`
-	BootstrapServers string `yaml:"bootstrap.servers"`
-	SaslMechanisms   string `yaml:"sasl.mechanisms"`
-	SecurityProtocol string `yaml:"security.protocol"`
-	SaslUsername     string `yaml:"sasl.username"`
-	SaslPassword     string `yaml:"sasl.password"`
-	SslCaLocation    string `yaml:"ssl.ca.location"`
-	ClientID         string `yaml:"client.id"`
-	Topics           string `yaml:"topics"`
-}
+// // configuration file kafka-config.yaml
+// type Config struct {
+// 	Producer         bool   `yaml:"producer"`
+// 	BootstrapServers string `yaml:"bootstrap.servers"`
+// 	SaslMechanisms   string `yaml:"sasl.mechanisms"`
+// 	SecurityProtocol string `yaml:"security.protocol"`
+// 	SaslUsername     string `yaml:"sasl.username"`
+// 	SaslPassword     string `yaml:"sasl.password"`
+// 	SslCaLocation    string `yaml:"ssl.ca.location"`
+// 	ClientID         string `yaml:"client.id"`
+// 	Topics           string `yaml:"topics"`
+// }
 
-// Event Message partial struct
-type Message struct {
-	Name      string `json:"name"`
-	Timestamp int64  `json:"timestamp"`
-	Tags      Tags   `json:"tags"`
-	// Tags      struct {
-	// 	Path             string `json:"path"`
-	// 	Prefix           string `json:"prefix"`
-	// 	Source           string `json:"source"`
-	// 	SubscriptionName string `json:"subscription-name"`
-	// } `json:"tags"`
-	Values json.RawMessage `json:"values"`
-}
+// // Event Message partial struct
+// type Message struct {
+// 	Name      string `json:"name"`
+// 	Timestamp int64  `json:"timestamp"`
+// 	Tags      Tags   `json:"tags"`
+// 	// Tags      struct {
+// 	// 	Path             string `json:"path"`
+// 	// 	Prefix           string `json:"prefix"`
+// 	// 	Source           string `json:"source"`
+// 	// 	SubscriptionName string `json:"subscription-name"`
+// 	// } `json:"tags"`
+// 	Values json.RawMessage `json:"values"`
+// }
 
-type Tags struct {
-	Path             string `json:"path"`
-	Prefix           string `json:"prefix"`
-	Source           string `json:"source"`
-	SubscriptionName string `json:"subscription-name"`
-}
+// type Tags struct {
+// 	Path             string `json:"path"`
+// 	Prefix           string `json:"prefix"`
+// 	Source           string `json:"source"`
+// 	SubscriptionName string `json:"subscription-name"`
+// }
