@@ -66,8 +66,8 @@ func main() {
 			Topic:     &topic,
 			Partition: kafka.PartitionAny,
 		},
-		Value:   jsonData,
-		Headers: []kafka.Header{{Key: "myTestHeader", Value: []byte("header values are binary")}},
+		Value: jsonData,
+		//Headers: []kafka.Header{{Key: "myTestHeader", Value: []byte("header values are binary")}},
 	}
 
 	// Produce the message to the Kafka topic
@@ -99,9 +99,7 @@ type Config struct {
 	SaslUsername     string `yaml:"sasl.username"`
 	SaslPassword     string `yaml:"sasl.password"`
 	SslCaLocation    string `yaml:"ssl.ca.location"`
-	GroupID          string `yaml:"group.id"`
 	Topics           string `yaml:"topics"`
-	AutoOffset       string `yaml:"auto.offset.reset"`
 }
 
 // Event Message partial struct
