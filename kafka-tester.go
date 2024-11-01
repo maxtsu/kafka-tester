@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	kafkatester "kafka-tester"
 	"os"
 	"os/signal"
 	"syscall"
