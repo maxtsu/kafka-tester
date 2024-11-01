@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
+	"generator/kafkatraffic"
 	"os"
 	"os/signal"
 	"syscall"
@@ -20,8 +20,8 @@ func main() {
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
 	// Rad the config file
-	byteResult := ReadFile(config_file)
-	var configYaml kafkatester.Config
+	byteResult := kafkatraffic.ReadFile(config_file)
+	var configYaml kafkatraffic.Config
 	err := yaml.Unmarshal(byteResult, &configYaml)
 	if err != nil {
 		fmt.Println("kafka-tester.yaml Unmarshall error", err)
@@ -51,8 +51,8 @@ func main() {
 	// test message
 	topic := "gnf.network.telemetry"
 	timestamp := (time.Now().UnixMicro())
-	test_tags := kafkatester.Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
-	test_msg := kafkatester.Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
+	test_tags := kafkatraffic.Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
+	test_msg := kafkatraffic.Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
 	key := "192.168.10.10:57344_global"
 
 	// Serialize the message Marshall from JSON
@@ -77,49 +77,3 @@ func main() {
 	}
 
 }
-
-// Function to read text file return byteResult
-func ReadFile(fileName string) []byte {
-	file, err := os.Open(fileName)
-	if err != nil {
-		fmt.Println("File reading error", err)
-		return []byte{}
-	}
-	byteResult, _ := io.ReadAll(file)
-	file.Close()
-	return byteResult
-}
-
-// // configuration file kafka-config.yaml
-// type Config struct {
-// 	Producer         bool   `yaml:"producer"`
-// 	BootstrapServers string `yaml:"bootstrap.servers"`
-// 	SaslMechanisms   string `yaml:"sasl.mechanisms"`
-// 	SecurityProtocol string `yaml:"security.protocol"`
-// 	SaslUsername     string `yaml:"sasl.username"`
-// 	SaslPassword     string `yaml:"sasl.password"`
-// 	SslCaLocation    string `yaml:"ssl.ca.location"`
-// 	ClientID         string `yaml:"client.id"`
-// 	Topics           string `yaml:"topics"`
-// }
-
-// // Event Message partial struct
-// type Message struct {
-// 	Name      string `json:"name"`
-// 	Timestamp int64  `json:"timestamp"`
-// 	Tags      Tags   `json:"tags"`
-// 	// Tags      struct {
-// 	// 	Path             string `json:"path"`
-// 	// 	Prefix           string `json:"prefix"`
-// 	// 	Source           string `json:"source"`
-// 	// 	SubscriptionName string `json:"subscription-name"`
-// 	// } `json:"tags"`
-// 	Values json.RawMessage `json:"values"`
-// }
-
-// type Tags struct {
-// 	Path             string `json:"path"`
-// 	Prefix           string `json:"prefix"`
-// 	Source           string `json:"source"`
-// 	SubscriptionName string `json:"subscription-name"`
-// }

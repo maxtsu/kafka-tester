@@ -1,6 +1,11 @@
-package kafkatester
+package kafkatraffic
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"os"
+)
 
 // configuration file kafka-config.yaml
 type Config struct {
@@ -34,4 +39,16 @@ type Tags struct {
 	Prefix           string `json:"prefix"`
 	Source           string `json:"source"`
 	SubscriptionName string `json:"subscription-name"`
+}
+
+// Function to read text file return byteResult
+func ReadFile(fileName string) []byte {
+	file, err := os.Open(fileName)
+	if err != nil {
+		fmt.Println("File reading error", err)
+		return []byte{}
+	}
+	byteResult, _ := io.ReadAll(file)
+	file.Close()
+	return byteResult
 }
