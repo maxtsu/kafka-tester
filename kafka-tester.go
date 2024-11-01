@@ -66,6 +66,17 @@ func main() {
 		if err != nil {
 			fmt.Printf("Failed to produce message: %s\n", err)
 		}
+		e := <-deliveryChan
+		m := e.(*kafka.Message)
+		if m.TopicPartition.Error != nil {
+			fmt.Printf("Delivery failed: %v\n", m.TopicPartition.Error)
+		} else {
+			fmt.Printf("Delivered message to topic %s [%d] at offset %v\n",
+				*m.TopicPartition.Topic, m.TopicPartition.Partition, m.TopicPartition.Offset)
+		}
+
+		close(deliveryChan)
+
 	}
 	time.Sleep(5 * time.Second)
 	fmt.Printf("Finshed program\n")
