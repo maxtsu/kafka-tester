@@ -1,6 +1,5 @@
 package kafkatester
 
-//teetwefewf
 import "encoding/json"
 
 // configuration file kafka-config.yaml

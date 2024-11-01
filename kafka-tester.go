@@ -1,4 +1,4 @@
-package main
+package kafkatester
 
 import (
 	"encoding/json"
