@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"gopkg.in/yaml.v2"
@@ -60,36 +61,7 @@ func main() {
 		if err != nil {
 			fmt.Printf("Failed to produce message: %s\n", err)
 		}
-
 	}
-
-	// //{"name":"global","timestamp":1730383584027000000,"tags":{"interface_name":"TwentyFiveGigE0/0/0/50","path":"/interfaces/interface/state/counters/","prefix":"openconfig-interfaces:","source":"10.49.2.73:57344","subscription-name":"global"},"values":{"openconfig-interfaces:/interfaces/interface/state/counters/carrier-transitions":"0"}}
-	// // test message
-	// topic := "gnf.network.telemetry"
-	// timestamp := (time.Now().UnixMicro())
-	// test_tags := kafkatraffic.Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
-	// test_msg := kafkatraffic.Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
-	// key := "192.168.10.10:57344_global"
-
-	// // Serialize the message Marshall from JSON
-	// jsonData, err := json.Marshal(test_msg)
-	// if err != nil {
-	// 	fmt.Printf("failed to serialize message: %w", err)
-	// }
-	// // construct kafka message
-	// message := &kafka.Message{
-	// 	TopicPartition: kafka.TopicPartition{
-	// 		Topic:     &topic,
-	// 		Partition: kafka.PartitionAny,
-	// 	},
-	// 	Key:   []byte(key),
-	// 	Value: jsonData,
-	// }
-
-	// // Produce the message to the Kafka topic
-	// err = producer.Produce(message, deliveryChan)
-	// if err != nil {
-	// 	fmt.Printf("Failed to produce message: %s\n", err)
-	// }
-
+	time.Sleep(5 * time.Second)
+	fmt.Printf("Finshed program\n")
 }
