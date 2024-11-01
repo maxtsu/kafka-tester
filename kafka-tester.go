@@ -10,12 +10,17 @@ import (
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"github.com/gologme/log"
 	"gopkg.in/yaml.v2"
 )
 
 const config_file = "kafka-tester.yaml"
 
 func main() {
+	log.EnableLevelsByNumber(5) //enable debug logging
+	log.EnableFormattedPrefix()
+	log.Infof("debug logging enabled\n")
+
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
