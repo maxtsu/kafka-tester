@@ -53,19 +53,20 @@ func main() {
 	timestamp := (time.Now().UnixMicro())
 	test_tags := Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: "192.168.10.10"}
 	test_msg := Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
+	key := "192.168.10.10:57344_global"
 
 	// Serialize the message Marshall from JSON
 	jsonData, err := json.Marshal(test_msg)
 	if err != nil {
 		fmt.Printf("failed to serialize message: %w", err)
 	}
-
 	// construct kafka message
 	message := &kafka.Message{
 		TopicPartition: kafka.TopicPartition{
 			Topic:     &topic,
 			Partition: kafka.PartitionAny,
 		},
+		Key:   []byte(key),
 		Value: jsonData,
 		//Headers: []kafka.Header{{Key: "myTestHeader", Value: []byte("header values are binary")}},
 	}
