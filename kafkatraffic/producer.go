@@ -44,6 +44,11 @@ type Tags struct {
 	SubscriptionName string `json:"subscription-name"`
 }
 
+type Subscription struct {
+	Name    string            `json:"name"`
+	Message struct{ Message } `json:"message"`
+}
+
 // Function to read text file return byteResult
 func ReadFile(fileName string) []byte {
 	file, err := os.Open(fileName)
