@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/gologme/log"
@@ -15,23 +14,30 @@ import (
 )
 
 const config_file = "kafka-tester.yaml"
+const subscription_file = "subscriptions.json"
 
 func main() {
-	log.EnableLevelsByNumber(5) //enable debug logging
-	log.EnableFormattedPrefix()
-	log.Infof("debug logging enabled\n")
-
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
 
 	// Read the config file
 	byteResult := kafkatraffic.ReadFile(config_file)
 	var configYaml kafkatraffic.Config
-	err := yaml.Unmarshal(byteResult, &configYaml)
-	if err != nil {
-		fmt.Println("kafka-tester.yaml Unmarshall error", err)
+	configYaml_err := yaml.Unmarshal(byteResult, &configYaml)
+	if configYaml_err != nil {
+		fmt.Println("kafka-tester.yaml Unmarshall error", configYaml_err)
 	}
 	fmt.Printf("kafka-tester.yaml: %+v\n", configYaml)
+
+	// Read subscription file
+	subscription_file_byteResult := kafkatraffic.ReadFile(subscription_file)
+	var subscriptions kafkatraffic.Subscription
+	subscriptionJson_err := json.Unmarshal(subscription_file_byteResult, &subscriptions)
+	if subscriptionJson_err != nil {
+		log.Errorln("subscriptions.json Unmarshall error", subscriptionJson_err)
+	}
+	fmt.Printf("%+v\n", subscriptions)
+
 	//Create producer
 	producer, err := kafkatraffic.CreateProducer(configYaml)
 	if err != nil {
@@ -40,7 +46,7 @@ func main() {
 	}
 	defer producer.Close()
 	// delivery channel
-	var deliveryChan = make(chan kafka.Event, 10000)
+	//var deliveryChan = make(chan kafka.Event, 10000)
 	fmt.Printf("Created Producer %v\n", producer)
 
 	list_of_devices := kafkatraffic.ListDevice()
@@ -62,22 +68,20 @@ func main() {
 			Value: jsonData,
 		}
 		// Produce the message to the Kafka topic
-		err = producer.Produce(message, deliveryChan)
+		err = producer.Produce(message, nil)
 		if err != nil {
 			fmt.Printf("Failed to produce message: %s\n", err)
 		}
-		e := <-deliveryChan
-		m := e.(*kafka.Message)
-		if m.TopicPartition.Error != nil {
-			fmt.Printf("Delivery failed: %v\n", m.TopicPartition.Error)
-		} else {
-			fmt.Printf("Delivered message to topic %s [%d] at offset %v\n",
-				*m.TopicPartition.Topic, m.TopicPartition.Partition, m.TopicPartition.Offset)
-		}
+		// e := <-deliveryChan
+		// m := e.(*kafka.Message)
+		// if m.TopicPartition.Error != nil {
+		// 	fmt.Printf("Delivery failed: %v\n", m.TopicPartition.Error)
 
-		close(deliveryChan)
-
+		// } else {
+		// 	fmt.Printf("Delivered message to topic %s [%d] at offset %v\n",
+		// 		*m.TopicPartition.Topic, m.TopicPartition.Partition, m.TopicPartition.Offset)
+		// }
 	}
-	time.Sleep(5 * time.Second)
+	// close(deliveryChan)
 	fmt.Printf("Finshed program\n")
 }
