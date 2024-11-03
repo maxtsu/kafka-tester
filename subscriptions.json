@@ -2,6 +2,8 @@
     {
         "name": "cisco-check-interface-state-oc",
         "index": ["interface_name"],
+        "path": "/interfaces/interface/state/",
+        "prefix": "openconfig-interfaces:",
         "message": {
             "name": "event_driven_hb",
             "timestamp": 1701372616333000000,

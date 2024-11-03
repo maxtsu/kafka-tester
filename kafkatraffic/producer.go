@@ -25,28 +25,24 @@ type Config struct {
 
 // Event Message partial struct
 type Message struct {
-	Name      string `json:"name"`
-	Timestamp int64  `json:"timestamp"`
-	Tags      Tags   `json:"tags"`
-	// Tags      struct {
-	// 	Path             string `json:"path"`
-	// 	Prefix           string `json:"prefix"`
-	// 	Source           string `json:"source"`
-	// 	SubscriptionName string `json:"subscription-name"`
-	// } `json:"tags"`
-	Values json.RawMessage `json:"values"`
+	Name      string            `json:"name"`
+	Timestamp int64             `json:"timestamp"`
+	Tags      map[string]string `json:"tags"`
+	Values    json.RawMessage   `json:"values"`
 }
 
-type Tags struct {
-	Path             string `json:"path"`
-	Prefix           string `json:"prefix"`
-	Source           string `json:"source"`
-	SubscriptionName string `json:"subscription-name"`
-}
+// type Tags struct {
+// 	Path             string `json:"path"`
+// 	Prefix           string `json:"prefix"`
+// 	Source           string `json:"source"`
+// 	SubscriptionName string `json:"subscription-name"`
+// }
 
 type Subscription struct {
-	Name    string            `json:"name"`
-	Message struct{ Message } `json:"message"`
+	Name   string   `json:"name"`
+	Index  []string `json:"index"`
+	Path   string   `json:"path"`
+	Prefix string   `json:"prefix"`
 }
 
 // Function to read text file return byteResult
@@ -66,12 +62,13 @@ func ListDevice() []string {
 	return li
 }
 
-func CreateJsonData(source string) (Message, string) {
+func CreateJsonData(source string, subscription Subscription) (Message, string) {
 	//{"name":"global","timestamp":1730383584027000000,"tags":{"interface_name":"TwentyFiveGigE0/0/0/50","path":"/interfaces/interface/state/counters/","prefix":"openconfig-interfaces:","source":"10.49.2.73:57344","subscription-name":"global"},"values":{"openconfig-interfaces:/interfaces/interface/state/counters/carrier-transitions":"0"}}
 	// test message
 	timestamp := (time.Now().UnixMicro())
-	test_tags := Tags{Path: "/test/path", Prefix: "openconfig-test:", Source: source}
-	jsondata := Message{Name: "global", Timestamp: timestamp, Tags: test_tags}
+	var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "source": source, "subscription-name": "global"}
+	//have to add list of indexes as indivdual tags
+	jsondata := Message{Name: "global", Timestamp: timestamp, Tags: tags}
 	key := source + ":57344_global"
 	return jsondata, key
 }
