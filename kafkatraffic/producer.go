@@ -37,10 +37,11 @@ type Index struct {
 }
 
 type Subscription struct {
-	Name   string  `json:"name"`
-	Index  []Index `json:"index"`
-	Path   string  `json:"path"`
-	Prefix string  `json:"prefix"`
+	Name   string          `json:"name"`
+	Index  []Index         `json:"index"`
+	Path   string          `json:"path"`
+	Prefix string          `json:"prefix"`
+	Values json.RawMessage `json:"values"`
 }
 
 // Function to read text file return byteResult
@@ -62,13 +63,8 @@ func ListDevice() []string {
 
 func CreateJsonData(source string, subscription Subscription) (Message, string) {
 	timestamp := (time.Now().UnixMicro())
-	// for _, index := range subscription.Index {
-
-	// }
-
 	var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "source": source, "subscription-name": "global"}
-
-	jsondata := Message{Name: "global", Timestamp: timestamp, Tags: tags}
+	jsondata := Message{Name: "global", Timestamp: timestamp, Tags: tags, Values: subscription.Values}
 	key := source + ":57344_global"
 	return jsondata, key
 }
