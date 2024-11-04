@@ -62,7 +62,7 @@ func ReadFile(fileName string) []byte {
 }
 
 func ListDevice() []string {
-	li := []string{"192.168.1.1", "192.168.1.2"}
+	li := []string{"1.2.1.1", "1.2.1.2"}
 	return li
 }
 

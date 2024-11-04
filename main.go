@@ -76,8 +76,6 @@ func main() {
 			//fmt.Printf("Pre-Message: %+v\n", message.Tags)
 			message = kafkatraffic.AddSource(source, message, timestamp)
 			key := source + ":57344_global"
-			// fmt.Printf("Message: %+v\n", message.Tags)
-			// fmt.Printf("Key: %+v\n", key)
 
 			// Serialize the message Marshall from JSON
 			jsonData, err := json.Marshal(message)
