@@ -24,5 +24,34 @@
             "openconfig-interfaces:/interfaces/interface/state/oper-status": "DOWN",
             "openconfig-interfaces:/interfaces/interface/state/type": "iana-if-type:ethernetCsmacd"
         }
+    },
+    {
+        "name": "cisco-check-subinterface-state-oc",
+        "index": [
+            {
+                "name": "interface_name",
+                "number": 5
+            },
+            {
+                "name": "subinterface_index",
+                "number": 5
+            }
+        ],
+        "path": "/interfaces/interface/subinterfaces/subinterface/state/",
+        "prefix": "openconfig-interfaces:",
+        "values": {
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/admin-status": "UP",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/carrier-transitions": "1",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/cpu": false,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/description": "uCompute Data plane INET service",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/enabled": true,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/ifindex": 148,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/index": 1034,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/last-change": "1699282046102122752",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/logical": true,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/management": false,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/name": "TenGigE0/0/0/1.1034",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/oper-status": "UP"
+        }
     }
 ]

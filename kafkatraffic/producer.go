@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"time"
+	"strconv"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
@@ -29,6 +29,11 @@ type Message struct {
 	Timestamp int64             `json:"timestamp"`
 	Tags      map[string]string `json:"tags"`
 	Values    json.RawMessage   `json:"values"`
+}
+
+type Tag struct {
+	Key   string
+	Value string
 }
 
 type Index struct {
@@ -61,12 +66,19 @@ func ListDevice() []string {
 	return li
 }
 
-func CreateJsonData(source string, subscription Subscription) (Message, string) {
-	timestamp := (time.Now().UnixMicro())
-	var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "source": source, "subscription-name": "global"}
-	jsondata := Message{Name: "global", Timestamp: timestamp, Tags: tags, Values: subscription.Values}
-	key := source + ":57344_global"
-	return jsondata, key
+// Create JSON message without source
+func CreateJsonData(subscription Subscription) Message {
+	var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "subscription-name": "global"}
+	jsondata := Message{Name: "global", Tags: tags, Values: subscription.Values}
+	return jsondata
+}
+
+// Add device source to teh message
+func AddSource(source string, message Message, timestamp int64) Message {
+	tags := message.Tags
+	tags["source"] = source + ":57344"
+	message_with_source := Message{Timestamp: timestamp, Tags: tags}
+	return message_with_source
 }
 
 func CreateProducer(configYaml Config) (*kafka.Producer, error) {
@@ -84,4 +96,38 @@ func CreateProducer(configYaml Config) (*kafka.Producer, error) {
 		return producer, fmt.Errorf("failed to create producer: %w", err)
 	}
 	return producer, nil
+}
+
+func matrix_tags(master_list [][]Tag, myindexes []Index, level int) [][]Tag {
+	length_of_indexes := len(myindexes)
+	index := myindexes[length_of_indexes-level] //saftey check level
+	var update_index_list [][]Tag
+	for _, sub_index := range master_list {
+		var intermediate_list []Tag
+		for i := range index.Number {
+			var t Tag
+			t.Value = index.Name + "_" + strconv.Itoa(i)
+			t.Key = index.Name
+			intermediate_list = append(sub_index, t)
+			update_index_list = append(update_index_list, intermediate_list)
+		}
+	}
+	return update_index_list
+}
+
+// Creating matix of indexes
+func Index_looping(indexes []Index) [][]Tag {
+	var master_list_index_tags [][]Tag
+	index := indexes[len(indexes)-1]
+	for i := range index.Number {
+		var t Tag
+		t.Value = index.Name + "_" + strconv.Itoa(i)
+		t.Key = index.Name
+		t_list := []Tag{t}
+		master_list_index_tags = append(master_list_index_tags, t_list)
+	}
+	for n := 2; n <= len(indexes); n++ {
+		master_list_index_tags = matrix_tags(master_list_index_tags, indexes, n)
+	}
+	return master_list_index_tags
 }

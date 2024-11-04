@@ -6,8 +6,8 @@ import (
 	"generator/kafkatraffic"
 	"os"
 	"os/signal"
-	"strconv"
 	"syscall"
+	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/gologme/log"
@@ -37,7 +37,8 @@ func main() {
 	if subscriptionJson_err != nil {
 		log.Errorln("subscriptions.json Unmarshall error", subscriptionJson_err)
 	}
-	fmt.Printf("Subscriptions: %+v\n\n", subscriptions)
+	var full_message_list []kafkatraffic.Message
+
 	//Create producer
 	producer, err := kafkatraffic.CreateProducer(configYaml)
 	if err != nil {
@@ -47,43 +48,81 @@ func main() {
 	defer producer.Close()
 	fmt.Printf("Created Producer %v\n", producer)
 
+	for _, subscription := range subscriptions { //range over subscriptions
+		// Create message for kafka using device and subscription (without indexes)
+		msg := kafkatraffic.CreateJsonData(subscription)
+
+		// Create the list of indexes for the subscription
+		master_list_index_tags := kafkatraffic.Index_looping(subscription.Index)
+		for _, indexes := range master_list_index_tags { // range over subscription indexes
+			for _, index := range indexes {
+				msg.Tags[index.Key] = index.Value // Add index tag
+				full_message_list = append(full_message_list, msg)
+			}
+		}
+	}
+	fmt.Printf("Message list: %+v\n", full_message_list)
+
 	list_of_devices := kafkatraffic.ListDevice()
-	for _, dev := range list_of_devices {
-		for _, subscription := range subscriptions { //range over subscriptions
-			// Create message for kafka using device and subscription (without indexes)
-			msg, key := kafkatraffic.CreateJsonData(dev, subscription)
+	for _, source := range list_of_devices {
+		fmt.Printf("Dev: %+v\n", source)
+		timestamp := (time.Now().UnixMicro())
+		for _, message := range full_message_list {
+			message := kafkatraffic.AddSource(source, message, timestamp)
+			key := source + ":57344_global"
+			fmt.Printf("Message: %+v\n", message.Tags)
+			fmt.Printf("Key: %+v\n", key)
 
-			for _, index := range subscription.Index { // range over subscription indexes
-				for i := range index.Number { // range over index number amount
-					index_string := index.Name + "_" + strconv.Itoa(i)
-					fmt.Printf("index: %s\n", index_string)
-					msg.Tags[index.Name] = index_string // Add index tag
-
-					fmt.Printf("Message: %+v\n", msg)
-
-					// Serialize the message Marshall from JSON
-					jsonData, err := json.Marshal(msg)
-					if err != nil {
-						fmt.Printf("failed to serialize message: %w", err)
-					}
-					// construct kafka message
-					message := &kafka.Message{
-						TopicPartition: kafka.TopicPartition{
-							Topic:     &configYaml.Topic,
-							Partition: kafka.PartitionAny,
-						},
-						Key:   []byte(key),
-						Value: jsonData,
-					}
-					// Produce the message to the Kafka topic
-					err = producer.Produce(message, nil)
-					if err != nil {
-						fmt.Printf("Failed to produce message: %s\n", err)
-					}
-				}
+			// Serialize the message Marshall from JSON
+			jsonData, err := json.Marshal(message)
+			if err != nil {
+				fmt.Printf("failed to serialize message: %w", err)
+			}
+			// construct kafka message
+			msg := &kafka.Message{
+				TopicPartition: kafka.TopicPartition{
+					Topic:     &configYaml.Topic,
+					Partition: kafka.PartitionAny,
+				},
+				Key:   []byte(key),
+				Value: jsonData,
+			}
+			// Produce the message to the Kafka topic
+			err = producer.Produce(msg, nil)
+			if err != nil {
+				fmt.Printf("Failed to produce message: %s\n", err)
 			}
 
 		}
 	}
+	// //Create producer
+	// producer, err := kafkatraffic.CreateProducer(configYaml)
+	// if err != nil {
+	// 	fmt.Printf("Failed to create producer: %s\n", err)
+	// 	os.Exit(1)
+	// }
+	// defer producer.Close()
+	// fmt.Printf("Created Producer %v\n", producer)
+
+	// // Serialize the message Marshall from JSON
+	// jsonData, err := json.Marshal(msg)
+	// if err != nil {
+	// 	fmt.Printf("failed to serialize message: %w", err)
+	// }
+	// key := "dummy"
+	// construct kafka message
+	// message := &kafka.Message{
+	// 	TopicPartition: kafka.TopicPartition{
+	// 		Topic:     &configYaml.Topic,
+	// 		Partition: kafka.PartitionAny,
+	// 	},
+	// 	Key:   []byte(key),
+	// 	Value: jsonData,
+	// }
+	// Produce the message to the Kafka topic
+	// err = producer.Produce(message, nil)
+	// if err != nil {
+	// 	fmt.Printf("Failed to produce message: %s\n", err)
+	// }
 	fmt.Printf("Finshed program\n")
 }
