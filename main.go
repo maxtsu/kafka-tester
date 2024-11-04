@@ -70,7 +70,7 @@ func main() {
 	// }
 	list_of_devices := kafkatraffic.ListDevice()
 	for _, source := range list_of_devices {
-		fmt.Printf("Dev: %+v\n", source)
+		//fmt.Printf("Dev: %+v\n", source)
 		timestamp := (time.Now().UnixMicro())
 		for _, message := range full_message_list {
 			//fmt.Printf("Pre-Message: %+v\n", message.Tags)
