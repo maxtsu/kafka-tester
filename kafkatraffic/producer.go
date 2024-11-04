@@ -61,9 +61,20 @@ func ReadFile(fileName string) []byte {
 	return byteResult
 }
 
-func ListDevice() []string {
-	li := []string{"1.2.1.1", "1.2.1.2"}
-	return li
+type devices struct {
+	Devices []string `json:"devices"`
+}
+
+func ListDevice(devices_file string) []string {
+	// Read the config file
+	byteResult := ReadFile(devices_file)
+	//convert the devices.json to a struct
+	var devicesjson devices
+	err := json.Unmarshal(byteResult, &devicesjson)
+	if err != nil {
+		fmt.Println("config.json Unmarshall error", err)
+	}
+	return devicesjson.Devices
 }
 
 // Create JSON message without source

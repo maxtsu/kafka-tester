@@ -16,10 +16,14 @@ import (
 
 const config_file = "kafka-tester.yaml"
 const subscription_file = "subscriptions.json"
+const devices_file = "list-devices.json"
 
 func main() {
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
+
+	// Get list of target devices from file
+	list_of_devices := kafkatraffic.ListDevice(devices_file)
 
 	// Read the config file
 	byteResult := kafkatraffic.ReadFile(config_file)
@@ -54,7 +58,7 @@ func main() {
 
 		// Create the list of indexes for the subscription
 		list_index_tags := kafkatraffic.Index_looping(subscription.Index)
-		fmt.Printf("list index tags: %+v\n", list_index_tags)
+		//fmt.Printf("list index tags: %+v\n", list_index_tags)
 		for _, indexes := range list_index_tags { // range over subscription indexes
 			// Perform the manual deep copy of message Tag maps
 			map_of_tags := kafkatraffic.DeepCopy(msg.Tags)
@@ -65,68 +69,40 @@ func main() {
 			full_message_list = append(full_message_list, msg)
 		}
 	}
-	// for _, ms := range full_message_list {
-	// 	fmt.Printf("Full List: %+v\n", ms.Tags)
-	// }
-	list_of_devices := kafkatraffic.ListDevice()
-	for _, source := range list_of_devices {
-		//fmt.Printf("Dev: %+v\n", source)
-		timestamp := (time.Now().UnixMicro())
-		for _, message := range full_message_list {
-			//fmt.Printf("Pre-Message: %+v\n", message.Tags)
-			message = kafkatraffic.AddSource(source, message, timestamp)
-			key := source + ":57344_global"
 
-			// Serialize the message Marshall from JSON
-			jsonData, err := json.Marshal(message)
-			if err != nil {
-				fmt.Printf("failed to serialize message: %w", err)
-			}
-			// construct kafka message
-			msg := &kafka.Message{
-				TopicPartition: kafka.TopicPartition{
-					Topic:     &configYaml.Topic,
-					Partition: kafka.PartitionAny,
-				},
-				Key:   []byte(key),
-				Value: jsonData,
-			}
-			// Produce the message to the Kafka topic
-			err = producer.Produce(msg, nil)
-			if err != nil {
-				fmt.Printf("Failed to produce message: %s\n", err)
-			}
+	run := true
+	for run {
+		for _, source := range list_of_devices {
+			fmt.Printf("Sending to device: %+v\n", source)
+			timestamp := (time.Now().UnixMicro())
+			for _, message := range full_message_list {
+				fmt.Printf("Sending Message: %+v\n", message.Tags)
+				message = kafkatraffic.AddSource(source, message, timestamp)
+				key := source + ":57344_global"
 
+				// Serialize the message Marshall from JSON
+				jsonData, err := json.Marshal(message)
+				if err != nil {
+					fmt.Printf("failed to serialize message: %w", err)
+				}
+				// construct kafka message
+				msg := &kafka.Message{
+					TopicPartition: kafka.TopicPartition{
+						Topic:     &configYaml.Topic,
+						Partition: kafka.PartitionAny,
+					},
+					Key:   []byte(key),
+					Value: jsonData,
+				}
+				// Produce the message to the Kafka topic
+				err = producer.Produce(msg, nil)
+				if err != nil {
+					fmt.Printf("Failed to produce message: %s\n", err)
+				}
+
+			}
 		}
+		time.Sleep(5 * time.Second)
 	}
-	// //Create producer
-	// producer, err := kafkatraffic.CreateProducer(configYaml)
-	// if err != nil {
-	// 	fmt.Printf("Failed to create producer: %s\n", err)
-	// 	os.Exit(1)
-	// }
-	// defer producer.Close()
-	// fmt.Printf("Created Producer %v\n", producer)
-
-	// // Serialize the message Marshall from JSON
-	// jsonData, err := json.Marshal(msg)
-	// if err != nil {
-	// 	fmt.Printf("failed to serialize message: %w", err)
-	// }
-	// key := "dummy"
-	// construct kafka message
-	// message := &kafka.Message{
-	// 	TopicPartition: kafka.TopicPartition{
-	// 		Topic:     &configYaml.Topic,
-	// 		Partition: kafka.PartitionAny,
-	// 	},
-	// 	Key:   []byte(key),
-	// 	Value: jsonData,
-	// }
-	// Produce the message to the Kafka topic
-	// err = producer.Produce(message, nil)
-	// if err != nil {
-	// 	fmt.Printf("Failed to produce message: %s\n", err)
-	// }
-	fmt.Printf("Finshed program\n")
+	fmt.Printf("Program Terminated\n")
 }

@@ -4,7 +4,7 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 5
+                "number": 100
             }
         ],
         "path": "/interfaces/interface/state/",
@@ -30,11 +30,11 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 5
+                "number": 100
             },
             {
                 "name": "subinterface_index",
-                "number": 5
+                "number": 200
             }
         ],
         "path": "/interfaces/interface/subinterfaces/subinterface/state/",
@@ -53,5 +53,103 @@
             "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/name": "TenGigE0/0/0/1.1034",
             "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/oper-status": "UP"
         }
+    },
+    {
+        "name": "cisco-check-interface-traffic-health-oc",
+        "index": [
+            {
+                "name": "interface_name",
+                "number": 100
+            }
+        ],
+        "path": "/interfaces/interface/state/counters/",
+        "prefix": "openconfig-interfaces:",
+        "values": {
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-broadcast-pkts": "518335",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-discards": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-errors": 0,
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-fcs-errors": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-multicast-pkts": "7115721",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-octets": "500002745",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-pkts": "7201352",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-unicast-pkts": "459",
+            "openconfig-interfaces:/interfaces/interface/state/counters/in-unknown-protos": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-broadcast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-discards": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-errors": 0,
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-multicast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-octets": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/state/counters/out-unicast-pkts": "0"
+        }
+    },
+    {
+        "name": "cisco-check-subinterface-traffic-health-oc",
+        "index": [
+            {
+                "name": "interface_name",
+                "number": 100
+            },
+            {
+                "name": "subinterface_index",
+                "number": 200
+            }
+        ],
+        "path": "/interfaces/interface/subinterfaces/subinterface/state/counters/",
+        "prefix": "openconfig-interfaces:",
+        "values": {
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-broadcast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-discards": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-errors": 0,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-fcs-errors": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-multicast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-octets": "2892",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-pkts": "39",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-unicast-pkts": "39",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/in-unknown-protos": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-broadcast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-discards": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-errors": 0,
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-multicast-pkts": "0",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-octets": "2410",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-pkts": "39",
+            "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-unicast-pkts": "39"
+          }
+    },
+    {
+        "name": "cisco-check-bfd-session-state",
+        "index": [
+            {
+                "name": "session-brief_destination-address",
+                "number": 2
+            },
+            {
+                "name": "session-brief_interface-name",
+                "number": 2
+            },
+            {
+                "name": "session-brief_local-discriminator",
+                "number": 2
+            },
+            {
+                "name": "session-brief_location",
+                "number": 1
+            }
+        ],
+        "path": "/bfd/session-briefs/session-brief/",
+        "prefix": "Cisco-IOS-XR-ip-bfd-oper:",
+        "values": {
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/session-flags": 0,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/session-subtype": "PR/V4/SH/BI/IB",
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/session-type": "bundle-interface",
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/state": "bfd-mgmt-session-state-up",
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/async-interval-multiplier/detection-multiplier": 3,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/async-interval-multiplier/detection-time": 900000,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/async-interval-multiplier/negotiated-local-transmit-interval": 300000,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/async-interval-multiplier/negotiated-remote-transmit-interval": 0,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/detection-multiplier": 0,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/detection-time": 0,
+            "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/negotiated-transmit-interval": 0
+          }
     }
 ]
