@@ -53,25 +53,31 @@ func main() {
 		msg := kafkatraffic.CreateJsonData(subscription)
 
 		// Create the list of indexes for the subscription
-		master_list_index_tags := kafkatraffic.Index_looping(subscription.Index)
-		for _, indexes := range master_list_index_tags { // range over subscription indexes
+		list_index_tags := kafkatraffic.Index_looping(subscription.Index)
+		fmt.Printf("list index tags: %+v\n", list_index_tags)
+		for _, indexes := range list_index_tags { // range over subscription indexes
+			// Perform the manual deep copy of message Tag maps
+			map_of_tags := kafkatraffic.DeepCopy(msg.Tags)
 			for _, index := range indexes {
-				msg.Tags[index.Key] = index.Value // Add index tag
-				full_message_list = append(full_message_list, msg)
+				map_of_tags[index.Key] = index.Value // Add index tag
 			}
+			msg.Tags = map_of_tags
+			full_message_list = append(full_message_list, msg)
 		}
 	}
-	fmt.Printf("Message list: %+v\n", full_message_list)
-
+	// for _, ms := range full_message_list {
+	// 	fmt.Printf("Full List: %+v\n", ms.Tags)
+	// }
 	list_of_devices := kafkatraffic.ListDevice()
 	for _, source := range list_of_devices {
 		fmt.Printf("Dev: %+v\n", source)
 		timestamp := (time.Now().UnixMicro())
 		for _, message := range full_message_list {
-			message := kafkatraffic.AddSource(source, message, timestamp)
+			//fmt.Printf("Pre-Message: %+v\n", message.Tags)
+			message = kafkatraffic.AddSource(source, message, timestamp)
 			key := source + ":57344_global"
-			fmt.Printf("Message: %+v\n", message.Tags)
-			fmt.Printf("Key: %+v\n", key)
+			// fmt.Printf("Message: %+v\n", message.Tags)
+			// fmt.Printf("Key: %+v\n", key)
 
 			// Serialize the message Marshall from JSON
 			jsonData, err := json.Marshal(message)

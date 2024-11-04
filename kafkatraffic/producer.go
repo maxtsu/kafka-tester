@@ -77,8 +77,10 @@ func CreateJsonData(subscription Subscription) Message {
 func AddSource(source string, message Message, timestamp int64) Message {
 	tags := message.Tags
 	tags["source"] = source + ":57344"
-	message_with_source := Message{Timestamp: timestamp, Tags: tags}
-	return message_with_source
+	message.Timestamp = timestamp
+	message.Tags = tags
+	//message_with_source := Message{Timestamp: timestamp, Tags: tags}
+	return message
 }
 
 func CreateProducer(configYaml Config) (*kafka.Producer, error) {
@@ -130,4 +132,13 @@ func Index_looping(indexes []Index) [][]Tag {
 		master_list_index_tags = matrix_tags(master_list_index_tags, indexes, n)
 	}
 	return master_list_index_tags
+}
+
+// Deepcopy function
+func DeepCopy(original map[string]string) map[string]string {
+	copy := make(map[string]string)
+	for key, value := range original {
+		copy[key] = value
+	}
+	return copy
 }
