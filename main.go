@@ -111,6 +111,7 @@ func main() {
 
 			}
 			if !run {
+				fmt.Printf("Breaking out of loop")
 				break
 			}
 		}
