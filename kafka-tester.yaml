@@ -8,3 +8,4 @@ sasl.password: "secret1"
 ssl.ca.location: ""
 client.id: "test100"
 topic: "gnf.network.telemetry"
+frequency: 10

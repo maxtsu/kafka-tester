@@ -33,6 +33,7 @@ func main() {
 		fmt.Println("kafka-tester.yaml Unmarshall error", configYaml_err)
 	}
 	fmt.Printf("kafka-tester.yaml: %+v\n", configYaml)
+	frequency := configYaml.Frequency
 
 	// Read subscription file
 	subscription_file_byteResult := kafkatraffic.ReadFile(subscription_file)
@@ -110,7 +111,11 @@ func main() {
 
 			}
 		}
-		time.Sleep(5 * time.Second) // 5second delay and repeat
+		if frequency != 0 {
+			time.Sleep(time.Duration(frequency) * time.Second) // frequency delay and repeat
+		} else {
+			run = false
+		}
 	}
 	fmt.Printf("Program Terminated\n")
 }

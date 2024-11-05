@@ -21,6 +21,7 @@ type Config struct {
 	SslCaLocation    string `yaml:"ssl.ca.location"`
 	ClientID         string `yaml:"client.id"`
 	Topic            string `yaml:"topic"`
+	Frequency        int    `yaml:"frequency"`
 }
 
 // Event Message partial struct
