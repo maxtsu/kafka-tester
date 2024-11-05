@@ -111,6 +111,9 @@ func main() {
 
 			}
 		}
+		if !run {
+			break
+		}
 		if frequency != 0 {
 			time.Sleep(time.Duration(frequency) * time.Second) // frequency delay and repeat
 		} else {
