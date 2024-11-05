@@ -116,6 +116,7 @@ func main() {
 			}
 		}
 		if frequency != 0 {
+			fmt.Printf("Pause for %+v seconds\n", frequency)
 			time.Sleep(time.Duration(frequency) * time.Second) // frequency delay and repeat
 		} else {
 			run = false
