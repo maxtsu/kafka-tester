@@ -104,7 +104,8 @@ func CreateProducer(configYaml Config) (*kafka.Producer, error) {
 		"sasl.password":     configYaml.SaslPassword,
 		"ssl.ca.location":   configYaml.SslCaLocation,
 		"client.id":         configYaml.ClientID,
-		"acks":              "all"})
+		"linger.ms":         200})
+	//"acks":              "all"})
 	if err != nil {
 		return producer, fmt.Errorf("failed to create producer: %w", err)
 	}
