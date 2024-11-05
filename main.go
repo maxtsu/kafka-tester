@@ -71,12 +71,20 @@ func main() {
 	}
 
 	run := true
+
+	go func() {
+		sig := <-sigchan
+		fmt.Println("Terminate with Signal")
+		fmt.Println(sig)
+		run = false
+	}()
+
 	for run {
 		for _, source := range list_of_devices {
 			fmt.Printf("Sending to device: %+v\n", source)
 			timestamp := (time.Now().UnixNano()) //timestamp in nano
 			for _, message := range full_message_list {
-				fmt.Printf("Sending Message: %+v\n", message.Tags)
+				//fmt.Printf("Sending Message: %+v\n", message.Tags)
 				message = kafkatraffic.AddSource(source, message, timestamp)
 				key := source + ":57344_global"
 
