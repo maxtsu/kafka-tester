@@ -74,7 +74,7 @@ func main() {
 	for run {
 		for _, source := range list_of_devices {
 			fmt.Printf("Sending to device: %+v\n", source)
-			timestamp := (time.Now().UnixMicro())
+			timestamp := (time.Now().UnixNano()) //timestamp in nano
 			for _, message := range full_message_list {
 				fmt.Printf("Sending Message: %+v\n", message.Tags)
 				message = kafkatraffic.AddSource(source, message, timestamp)
@@ -102,7 +102,7 @@ func main() {
 
 			}
 		}
-		time.Sleep(5 * time.Second)
+		time.Sleep(5 * time.Second) // 5second delay and repeat
 	}
 	fmt.Printf("Program Terminated\n")
 }

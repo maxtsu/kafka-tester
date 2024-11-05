@@ -114,7 +114,7 @@
             "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-octets": "2410",
             "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-pkts": "39",
             "openconfig-interfaces:/interfaces/interface/subinterfaces/subinterface/state/counters/out-unicast-pkts": "39"
-          }
+        }
     },
     {
         "name": "cisco-check-bfd-session-state",
@@ -150,6 +150,99 @@
             "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/detection-multiplier": 0,
             "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/detection-time": 0,
             "Cisco-IOS-XR-ip-bfd-oper:/bfd/session-briefs/session-brief/status-brief-information/echo-interval-multiplier/negotiated-transmit-interval": 0
+        }
+    },
+    {
+        "name": "cisco-check-isis-adjacencies",
+        "index": [
+            {
+                "name": "adjacency_system-id",
+                "number": 2
+            },
+            {
+                "name": "network-instance_name",
+                "number": 2
+            },
+            {
+                "name": "interface_interface-id",
+                "number": 2
+            }
+        ],
+        "path": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/",
+        "prefix": "openconfig-network-instance:",
+        "values": {
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-state": "UP",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/adjacency-type": "LEVEL_2",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/area-address.0": "49.0000",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/local-extended-circuit-id": 145,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/multi-topology": false,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/neighbor-circuit-type": "LEVEL_2",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/neighbor-extended-circuit-id": 70,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/neighbor-ipv4-address": "192.168.210.136",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/neighbor-ipv6-address": "::",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/neighbor-snpa": "3c26.e402.0102",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/nlpid.0": "IPV4",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/nlpid.1": "IPV6",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/priority": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/remaining-hold-time": 28,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/restart-status": false,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/restart-support": true,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/restart-suppress": false,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/system-id": "0102.1309.7048",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/topology.0": "IPV4_UNICAST",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/topology.1": "IPV4_MULTICAST",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/topology.2": "IPV6_UNICAST",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/up-time": 92741
+        }
+    },
+    {
+        "name": "cisco-check-isis-statistics",
+        "index": [
+            {
+                "name": "adjacency_system-id",
+                "number": 2
+            },
+            {
+                "name": "network-instance_name",
+                "number": 2
+            },
+            {
+                "name": "interface_interface-id",
+                "number": 2
+            },
+            {
+                "name": "protocol_identifier",
+                "number": 2
+            }
+        ],
+        "path": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/adjacencies/adjacency/state/",
+        "prefix": "openconfig-network-instance:",
+        "values": {
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp/state/dropped": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp/state/processed": 2,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp/state/received": 2,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp/state/retransmit": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/csnp/state/sent": 2,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih/state/dropped": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih/state/processed": 10618,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih/state/received": 10618,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih/state/retransmit": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/iih/state/sent": 10646,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp/state/dropped": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp/state/processed": 125,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp/state/received": 125,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp/state/retransmit": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/lsp/state/sent": 28,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp/state/dropped": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp/state/processed": 20,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp/state/received": 20,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp/state/retransmit": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/psnp/state/sent": 114,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/dropped": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/processed": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/received": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/retransmit": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/sent": 0
           }
     }
 ]
