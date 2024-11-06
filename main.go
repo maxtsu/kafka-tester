@@ -74,6 +74,10 @@ func main() {
 	//run := true
 	run := false
 
+	for _, d := range configYaml.Devices {
+		fmt.Println(d)
+	}
+
 	go func() {
 		sig := <-sigchan
 		fmt.Println("Terminate with Signal")
