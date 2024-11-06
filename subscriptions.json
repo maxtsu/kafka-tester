@@ -206,10 +206,6 @@
         "name": "cisco-check-isis-statistics",
         "index": [
             {
-                "name": "network-instance_name",
-                "number": 2
-            },
-            {
                 "name": "interface_interface-id",
                 "number": 2
             }
@@ -248,6 +244,71 @@
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/received": 0,
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/retransmit": 0,
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/packet-counters/unknown/state/sent": 0
+        }
+    },
+    {
+        "name": "cisco-check-bgp-neighbor-state",
+        "index": [
+            {
+                "name": "neighbor_neighbor-address",
+                "number": 4
+            }
+        ],
+        "tags": {
+            "network-instance_name": "default",
+            "path": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/",
+            "prefix": "openconfig-network-instance:",
+            "protocol_identifier": "BGP",
+            "protocol_name": "default"
+        },
+        "values": {
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/dynamically-configured": false,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/enabled": true,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/established-transitions": "7",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/last-established": "1700821982176164000",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/received/NOTIFICATION": "0",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/received/UPDATE": "57459",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/sent/NOTIFICATION": "2",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/sent/UPDATE": "63",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/sent/last-notification-error-code": "CEASE",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/sent/last-notification-error-subcode": "ADMINISTRATIVE_SHUTDOWN",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/messages/sent/last-notification-time": "1700821909866821000",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/neighbor-address": "10.213.97.59",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-as": 5400,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-group": "RR-IP",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/peer-type": "INTERNAL",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/queues/input": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/queues/output": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/session-state": "ESTABLISHED",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/supported-capabilities.0": "GRACEFUL_RESTART",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/supported-capabilities.1": "ROUTE_REFRESH",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/supported-capabilities.2": "ASN32",
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/supported-capabilities.3": "MPBGP"
+        }
+    },
+    {
+        "name": "cisco-check-bgp-routes",
+        "index": [
+            {
+                "name": "neighbor_neighbor-address",
+                "number": 4
+            }
+        ],
+        "tags": {
+            "afi-safi_afi-safi-name": "IPV6_LABELED_UNICAST",
+            "network-instance_name": "default",
+            "path": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/",
+            "prefix": "openconfig-network-instance:",
+            "protocol_identifier": "BGP",
+            "protocol_name": "default",
+            "source": "10.213.97.34:57344",
+            "subscription-name": "sub1"
+        },
+        "values": {
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/installed": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received-pre-policy": 0,
+            "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/sent": 0
         }
     }
 ]
