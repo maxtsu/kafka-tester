@@ -16,14 +16,10 @@ import (
 
 const config_file = "kafka-tester.yaml"
 const subscription_file = "subscriptions.json"
-const devices_file = "list-devices.json"
 
 func main() {
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)
-
-	// Get list of target devices from file
-	list_of_devices := kafkatraffic.ListDevice(devices_file)
 
 	// Read the config file
 	byteResult := kafkatraffic.ReadFile(config_file)
@@ -34,6 +30,8 @@ func main() {
 	}
 	fmt.Printf("kafka-tester.yaml: %+v\n", configYaml)
 	frequency := configYaml.Frequency
+	// Get list of target device from config file
+	list_of_devices := configYaml.Devices
 
 	// Read subscription file
 	subscription_file_byteResult := kafkatraffic.ReadFile(subscription_file)
@@ -71,12 +69,7 @@ func main() {
 		}
 	}
 
-	//run := true
-	run := false
-
-	for _, d := range configYaml.Devices {
-		fmt.Println(d)
-	}
+	run := true
 
 	go func() {
 		sig := <-sigchan

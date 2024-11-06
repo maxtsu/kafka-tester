@@ -44,11 +44,10 @@ type Index struct {
 }
 
 type Subscription struct {
-	Name   string          `json:"name"`
-	Index  []Index         `json:"index"`
-	Path   string          `json:"path"`
-	Prefix string          `json:"prefix"`
-	Values json.RawMessage `json:"values"`
+	Name   string            `json:"name"`
+	Index  []Index           `json:"index"`
+	Tags   map[string]string `json:"tags"`
+	Values json.RawMessage   `json:"values"`
 }
 
 // Function to read text file return byteResult
@@ -81,7 +80,9 @@ func ListDevice(devices_file string) []string {
 
 // Create JSON message without source
 func CreateJsonData(subscription Subscription) Message {
-	var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "subscription-name": "global"}
+	// var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "subscription-name": "global"}
+	var tags = subscription.Tags
+	tags["subscription-name"] = "global"
 	jsondata := Message{Name: "global", Tags: tags, Values: subscription.Values}
 	return jsondata
 }
