@@ -4,7 +4,7 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 1
+                "number": 100
             }
         ],
         "tags": {
@@ -32,11 +32,11 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 1
+                "number": 100
             },
             {
                 "name": "subinterface_index",
-                "number": 1
+                "number": 100
             }
         ],
         "tags": {
@@ -160,12 +160,8 @@
         "name": "cisco-check-isis-adjacencies",
         "index": [
             {
-                "name": "network-instance_name",
-                "number": 2
-            },
-            {
                 "name": "interface_interface-id",
-                "number": 2
+                "number": 4
             }
         ],
         "tags": {
@@ -207,7 +203,7 @@
         "index": [
             {
                 "name": "interface_interface-id",
-                "number": 2
+                "number": 4
             }
         ],
         "tags": {
