@@ -147,7 +147,7 @@ func Index_looping(indexes []Index) [][]Tag {
 	return master_list_index_tags
 }
 
-// Deepcopy function
+// Deepcopy function to copy a map
 func DeepCopy(original map[string]string) map[string]string {
 	copy := make(map[string]string)
 	for key, value := range original {
