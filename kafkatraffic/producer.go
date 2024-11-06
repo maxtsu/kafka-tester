@@ -12,16 +12,17 @@ import (
 
 // configuration file kafka-config.yaml
 type Config struct {
-	Producer         bool   `yaml:"producer"`
-	BootstrapServers string `yaml:"bootstrap.servers"`
-	SaslMechanisms   string `yaml:"sasl.mechanisms"`
-	SecurityProtocol string `yaml:"security.protocol"`
-	SaslUsername     string `yaml:"sasl.username"`
-	SaslPassword     string `yaml:"sasl.password"`
-	SslCaLocation    string `yaml:"ssl.ca.location"`
-	ClientID         string `yaml:"client.id"`
-	Topic            string `yaml:"topic"`
-	Frequency        int    `yaml:"frequency"`
+	Producer         bool     `yaml:"producer"`
+	BootstrapServers string   `yaml:"bootstrap.servers"`
+	SaslMechanisms   string   `yaml:"sasl.mechanisms"`
+	SecurityProtocol string   `yaml:"security.protocol"`
+	SaslUsername     string   `yaml:"sasl.username"`
+	SaslPassword     string   `yaml:"sasl.password"`
+	SslCaLocation    string   `yaml:"ssl.ca.location"`
+	ClientID         string   `yaml:"client.id"`
+	Topic            string   `yaml:"topic"`
+	Frequency        int      `yaml:"frequency"`
+	Devices          []string `yaml:"devices"`
 }
 
 // Event Message partial struct

@@ -71,7 +71,8 @@ func main() {
 		}
 	}
 
-	run := true
+	//run := true
+	run := false
 
 	go func() {
 		sig := <-sigchan

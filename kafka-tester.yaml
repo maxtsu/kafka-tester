@@ -9,3 +9,4 @@ ssl.ca.location: ""
 client.id: "test100"
 topic: "gnf.network.telemetry"
 frequency: 10
+devices: ["1.2.1.1","1.2.1.2"]
