@@ -1,14 +1,14 @@
 # kafka-tester
 ## v0.2
-kafka traffic generator for telemetry testing
-Will send subscriptions as listed in subscriptions.json
-Details of kafka broker, and list of devices in kafka-tester.yaml
+kafka traffic generator for telemetry testing  
+Will send subscriptions as listed in subscriptions.json  
+Details of kafka broker, and list of devices in kafka-tester.yaml  
 To run *./kafka-tester.app*
 Requires files 
 * kafka-tester.yaml
 * subscriptions.json
 
-More devices are added in *kafka-tester.yaml* add to the list: *devices* 
+More devices are added in *kafka-tester.yaml* add to the list: *devices*  
 Subscriptions are the list of subscription message produced. The index in each subscription is the scaling/multiplier of each subscription message.
 
 ## Release

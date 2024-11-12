@@ -296,15 +296,39 @@
             "path": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/",
             "prefix": "openconfig-network-instance:",
             "protocol_identifier": "BGP",
-            "protocol_name": "default",
-            "source": "10.213.97.34:57344",
-            "subscription-name": "sub1"
+            "protocol_name": "default"
         },
         "values": {
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/installed": 0,
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received": 0,
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/received-pre-policy": 0,
             "openconfig-network-instance:/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/state/prefixes/sent": 0
+        }
+    },
+    {
+        "name": "cisco-check-ntp-state-oc",
+        "index": [
+            {
+                "name": "neighbor_ntp",
+                "number": 1
+            }
+        ],
+        "tags": {
+            "path": "/system/ntp/servers/server/",
+            "prefix": "openconfig-system:"
+        },
+        "values": {
+            "openconfig-system:/system/ntp/servers/server/address": "10.213.97.64",
+            "openconfig-system:/system/ntp/servers/server/state/address": "10.213.97.64",
+            "openconfig-system:/system/ntp/servers/server/state/association-type": "SERVER",
+            "openconfig-system:/system/ntp/servers/server/state/iburst": false,
+            "openconfig-system:/system/ntp/servers/server/state/offset": "0",
+            "openconfig-system:/system/ntp/servers/server/state/poll-interval": 1024,
+            "openconfig-system:/system/ntp/servers/server/state/prefer": false,
+            "openconfig-system:/system/ntp/servers/server/state/root-delay": 0,
+            "openconfig-system:/system/ntp/servers/server/state/root-dispersion": "0",
+            "openconfig-system:/system/ntp/servers/server/state/stratum": 16,
+            "openconfig-system:/system/ntp/servers/server/state/version": 4
         }
     }
 ]
