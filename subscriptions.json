@@ -346,5 +346,89 @@
             "openconfig-system:/system/alarms/alarm/state/time-created": "1728905178",
             "openconfig-system:/system/alarms/alarm/state/type-id": "openconfig-alarm-types:HW_NPU_INTF_REQUIRES_ANLT"
         }
+    },
+    {
+        "name": "cisco-check-chassis-temperature-oc",
+        "index": [
+            {
+                "name": "component_name",
+                "number": 5
+            }
+        ],
+        "tags": {
+            "path": "/components/component/state/temperature/",
+            "prefix": "openconfig-platform:"
+        },
+        "values": {
+            "openconfig-platform:/components/component/state/temperature/alarm-status": false,
+            "openconfig-platform:/components/component/state/temperature/avg": "19",
+            "openconfig-platform:/components/component/state/temperature/instant": "20",
+            "openconfig-platform:/components/component/state/temperature/interval": "5",
+            "openconfig-platform:/components/component/state/temperature/max": "20",
+            "openconfig-platform:/components/component/state/temperature/max-time": "1731504714617064780",
+            "openconfig-platform:/components/component/state/temperature/min": "19",
+            "openconfig-platform:/components/component/state/temperature/min-time": "1731504838110649075"
+        }
+    },
+    {
+        "name": "cisco-check-components-health-oc",
+        "index": [
+            {
+                "name": "component_name",
+                "number": 5
+            }
+        ],
+        "tags": {
+            "path": "/components/component/state/",
+            "prefix": "openconfig-platform:"
+        },
+        "values": {
+            "openconfig-platform:/components/component/state/description": "I350 Ethernet Controller Module",
+            "openconfig-platform:/components/component/state/empty": false,
+            "openconfig-platform:/components/component/state/id": "114912",
+            "openconfig-platform:/components/component/state/location": "0/RP1",
+            "openconfig-platform:/components/component/state/name": "0/RP1-NIC",
+            "openconfig-platform:/components/component/state/openconfig-platform-ext:entity-id": 114912,
+            "openconfig-platform:/components/component/state/parent": "0/RP1-Motherboard",
+            "openconfig-platform:/components/component/state/removable": false
+        }
+    },
+    {
+        "name": "cisco-check-fan-health-oc",
+        "index": [
+            {
+                "name": "component_name",
+                "number": 5
+            }
+        ],
+        "tags": {
+            "path": "/components/component/fan/state/",
+            "prefix": "openconfig-platform:"
+        },
+        "values": {
+            "openconfig-platform:/components/component/fan/state/openconfig-platform-fan:speed": 4080
+        }
+    },
+    {
+        "name": "cisco-check-rp-status",
+        "index": [
+            {
+                "name": "slot_slot-name",
+                "number": 3
+            }
+        ],
+        "tags": {
+            "path": "/platform/racks/rack/slots/slot/vm/",
+            "prefix": "Cisco-IOS-XR-platform-oper:",
+            "rack_rack-name": "0"
+        },
+        "values": {
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/node-description": "RP",
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/node-ip": "192.0.4.4",
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/node-name": "0/RP1/CPU0",
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/partner-name": "0/RP0/CPU0",
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/red-role": "STANDBY",
+            "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/software-status": "FINAL Band"
+        }
     }
 ]
