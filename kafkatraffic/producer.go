@@ -62,22 +62,6 @@ func ReadFile(fileName string) []byte {
 	return byteResult
 }
 
-type devices struct {
-	Devices []string `json:"devices"`
-}
-
-func ListDevice(devices_file string) []string {
-	// Read the config file
-	byteResult := ReadFile(devices_file)
-	//convert the devices.json to a struct
-	var devicesjson devices
-	err := json.Unmarshal(byteResult, &devicesjson)
-	if err != nil {
-		fmt.Println("config.json Unmarshall error", err)
-	}
-	return devicesjson.Devices
-}
-
 // Create JSON message without source
 func CreateJsonData(subscription Subscription) Message {
 	// var tags = map[string]string{"path": subscription.Path, "prefix": subscription.Prefix, "subscription-name": "global"}
@@ -87,7 +71,7 @@ func CreateJsonData(subscription Subscription) Message {
 	return jsondata
 }
 
-// Add device source to teh message
+// Add device source to the message
 func AddSource(source string, message Message, timestamp int64) Message {
 	tags := message.Tags
 	tags["source"] = source + ":57344"
@@ -117,7 +101,7 @@ func CreateProducer(configYaml Config) (*kafka.Producer, error) {
 
 func matrix_tags(master_list [][]Tag, myindexes []Index, level int) [][]Tag {
 	length_of_indexes := len(myindexes)
-	index := myindexes[length_of_indexes-level] //saftey check level
+	index := myindexes[length_of_indexes-level] //safety check level
 	var update_index_list [][]Tag
 	for _, sub_index := range master_list {
 		var intermediate_list []Tag
@@ -132,7 +116,7 @@ func matrix_tags(master_list [][]Tag, myindexes []Index, level int) [][]Tag {
 	return update_index_list
 }
 
-// Creating matix of indexes
+// Creating matrix of indexes
 func Index_looping(indexes []Index) [][]Tag {
 	var master_list_index_tags [][]Tag
 	index := indexes[len(indexes)-1]

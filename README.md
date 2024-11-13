@@ -1,5 +1,5 @@
 # kafka-tester
-## v0.2
+## v0.3
 kafka traffic generator for telemetry testing  
 Will send subscriptions as listed in subscriptions.json  
 Details of kafka broker, and list of devices in kafka-tester.yaml  
@@ -16,3 +16,5 @@ Subscriptions are the list of subscription message produced. The index in each s
 - v0.2 07/11/2024
     - Removed seperate *list_devices.json* file
     - Behaviour change of index listing
+- v0.3 13/11/2024
+    - Added behaviour for subscription with no indexes

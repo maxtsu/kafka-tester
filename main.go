@@ -55,22 +55,27 @@ func main() {
 		// Create message for kafka using device and subscription (without indexes)
 		msg := kafkatraffic.CreateJsonData(subscription)
 
-		// Create the list of indexes for the subscription
-		list_index_tags := kafkatraffic.Index_looping(subscription.Index)
-		//fmt.Printf("list index tags: %+v\n", list_index_tags)
-		for _, indexes := range list_index_tags { // range over subscription indexes
-			// Perform the manual deep copy of message Tag maps
-			map_of_tags := kafkatraffic.DeepCopy(msg.Tags)
-			for _, index := range indexes {
-				map_of_tags[index.Key] = index.Value // Add index tag
-			}
-			msg.Tags = map_of_tags
+		if len(subscription.Index) == 0 {
+			// No indexes single message only no index tags added
 			full_message_list = append(full_message_list, msg)
+			fmt.Printf("%+v", full_message_list)
+		} else {
+			// Create the list of indexes for the subscription
+			list_index_tags := kafkatraffic.Index_looping(subscription.Index)
+			//fmt.Printf("list index tags: %+v\n", list_index_tags)
+			for _, indexes := range list_index_tags { // range over subscription indexes
+				// Perform the manual deep copy of message Tag maps
+				map_of_tags := kafkatraffic.DeepCopy(msg.Tags)
+				for _, index := range indexes {
+					map_of_tags[index.Key] = index.Value // Add index tag
+				}
+				msg.Tags = map_of_tags
+				full_message_list = append(full_message_list, msg)
+			}
 		}
 	}
 
 	run := true
-
 	go func() {
 		sig := <-sigchan
 		fmt.Println("Terminate with Signal")

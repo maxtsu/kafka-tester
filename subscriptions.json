@@ -330,5 +330,21 @@
             "openconfig-system:/system/ntp/servers/server/state/stratum": 16,
             "openconfig-system:/system/ntp/servers/server/state/version": 4
         }
+    },
+    {
+        "name": "cisco-check-chassis-alarms",
+        "tags": {
+            "path": "/system/alarms/alarm/",
+            "prefix": "openconfig-system:"
+        },
+        "values": {
+            "openconfig-system:/system/alarms/alarm/id": "XR_FABRIC/HW_ERROR/37#PORT/OPTICS/30",
+            "openconfig-system:/system/alarms/alarm/state/id": "XR_FABRIC/HW_ERROR/37#PORT/OPTICS/30",
+            "openconfig-system:/system/alarms/alarm/state/resource": "Port 0/0/0/3 ",
+            "openconfig-system:/system/alarms/alarm/state/severity": "openconfig-alarm-types:MAJOR",
+            "openconfig-system:/system/alarms/alarm/state/text": "Interface: requires to have auto negotiation (ANLT) enabled",
+            "openconfig-system:/system/alarms/alarm/state/time-created": "1728905178",
+            "openconfig-system:/system/alarms/alarm/state/type-id": "openconfig-alarm-types:HW_NPU_INTF_REQUIRES_ANLT"
+        }
     }
 ]
