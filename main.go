@@ -58,7 +58,6 @@ func main() {
 		if len(subscription.Index) == 0 {
 			// No indexes single message only no index tags added
 			full_message_list = append(full_message_list, msg)
-			fmt.Printf("%+v", full_message_list)
 		} else {
 			// Create the list of indexes for the subscription
 			list_index_tags := kafkatraffic.Index_looping(subscription.Index)
