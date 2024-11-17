@@ -4,7 +4,7 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 100
+                "number": 10
             }
         ],
         "tags": {
@@ -32,11 +32,11 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 100
+                "number": 10
             },
             {
                 "name": "subinterface_index",
-                "number": 100
+                "number": 10
             }
         ],
         "tags": {
@@ -63,7 +63,7 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 100
+                "number": 10
             }
         ],
         "tags": {
@@ -94,11 +94,11 @@
         "index": [
             {
                 "name": "interface_name",
-                "number": 100
+                "number": 10
             },
             {
                 "name": "subinterface_index",
-                "number": 200
+                "number": 10
             }
         ],
         "tags": {
