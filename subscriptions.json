@@ -430,5 +430,74 @@
             "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/red-role": "STANDBY",
             "Cisco-IOS-XR-platform-oper:/platform/racks/rack/slots/slot/vm/software-status": "FINAL Band"
         }
+    },
+    {
+        "name": "cisco-check-interface-speed",
+        "index": [
+            {
+                "name": "interface_name",
+                "number": 10
+            }
+        ],
+        "tags": {
+            "path": "/interfaces/interface/openconfig-if-ethernet:ethernet/state/",
+            "prefix": "openconfig-interfaces:"
+        },
+        "values": {
+            "openconfig-interfaces:/interfaces/interface/openconfig-if-ethernet:ethernet/state/port-speed": "SPEED_10GB"
+        }
+    },
+    {
+        "name": "cisco-check-system-power-usage",
+        "index": [
+            {
+                "name": "location_location",
+                "number": 3
+            }
+        ],
+        "tags": {
+            "path": "/environment/oper/power/location/pem_attributes/card-type/",
+            "pem_attributes_pem": "0/1",
+            "prefix": "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:"
+        },
+        "values": {
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/card-type/value": "0/1",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/input-current-to-ps/value": "6.8",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/input-current/value": "0.0",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/input-power-to-ps": 1544,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/input-voltage/value": "0.0",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-current-from-ps/value": "117.900000",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-current/value": "0.000000",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-footer": 0,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-header": 3,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-power-from-ps": 1415,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/output-voltage/value": "0.000000",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/pem-id/value": "NC57-18DD-SE",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/power-allocated": 1365,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/power-consumed/value": "604",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/power-level": 3,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/power-status/value": "ON",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/ps-sum-footer": 0,
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/ps-type/value": "NA",
+            "Cisco-IOS-XR-sysadmin-fretta-envmon-ui:/environment/oper/power/location/pem_attributes/shelf-num": 0
+        }
+    },
+    {
+        "name": "cisco-check-system-memory-oc",
+        "index": [
+            {
+                "name": "component_name",
+                "number": 3
+            }
+        ],
+        "tags": {
+            "component_name": "0/RP0/CPU0-Intel Xeon CPU",
+            "path": "/components/component/state/memory/",
+            "prefix": "openconfig-platform:"
+        },
+        "values": {
+            "openconfig-platform:/components/component/state/memory/available": "33056768000",
+            "openconfig-platform:/components/component/state/memory/utilized": "8012615680"
+        }
     }
 ]
